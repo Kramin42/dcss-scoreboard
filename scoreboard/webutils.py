@@ -140,7 +140,8 @@ def _games_to_table(env: jinja2.environment.Environment,
             duration=prettydur(game.dur),
             date=prettydate(game.end),
             version=game.version.v,
-            morgue=morgue_link(game))
+            morgue=morgue_link(game, 
+                text="<i class=\"fa fa-file-text\" aria-hidden=\"true\"></i>"))
 
     t = """<table id="{id}" class="{classes}">
           <thead>
@@ -188,7 +189,7 @@ def _games_to_table(env: jinja2.environment.Environment,
               <th class="text-xs-right">Duration</th>
               <th class="text-xs-right">Date</th>
               <th>Version</th>
-              <th class="text-xs-center">💀</th>""".format(
+              <th class="text-xs-left">Links</th>""".format(
         rank='' if not show_ranks else '<th class="text-xs-right"></th>',
         prefix='' if not prefix_col else '<th>%s</th>' % prefix_col_title,
         player='' if not show_player else '<th>Player</th>',
@@ -211,7 +212,7 @@ def _games_to_table(env: jinja2.environment.Environment,
       <td class="text-xs-right">{duration}</td>
       <td class="text-xs-right">{date}</td>
       <td>{version}</td>
-      <td>{morgue}</td>
+      <td class="text-xs-left">{morgue}</td>
     </tr>"""
 
     tbody = "\n".join(
