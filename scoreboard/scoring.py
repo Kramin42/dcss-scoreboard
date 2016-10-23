@@ -6,7 +6,6 @@ import sqlalchemy.orm  # for sqlalchemy.orm.session.Session type hints
 
 import scoreboard.model as model
 import scoreboard.orm as orm
-import scoreboard.constants as const
 
 
 def is_valid_streak_addition(game: orm.Game,
@@ -99,7 +98,8 @@ def score_games() -> set:
     new_scored = 0
     print("Scoring games...")
     while True:
-        games = model.list_games(s, scored=False, limit=100)
+        games = model.list_games(
+            s, scored=False, limit=100, reverse_order=True)
         if not games:
             break
         for game in games:

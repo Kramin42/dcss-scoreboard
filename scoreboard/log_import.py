@@ -86,6 +86,7 @@ def load_logfiles(logdir: str) -> None:
 
 def read_logfile(s: sqlalchemy.orm.session.Session,
                  logfile: Logfile) -> Iterable[LogfileLine]:
+    """Read a logfile, yielding LogfileLine objects."""
     if os.stat(logfile.path).st_size == 0:
         return StopIteration
     start = time.time()
@@ -204,6 +205,10 @@ def parse_logfile_line(s: sqlalchemy.orm.session.Session,
 
 
 def add_game(s: sqlalchemy.orm.session.Session, game: Optional[dict]) -> bool:
+    """Add a game to the database.
+
+    Returns True if a game was found and successfully added.
+    """
     if game is None:
         return False
     # Store the game in the database
@@ -231,7 +236,7 @@ def parse_field(field: str) -> Tuple[str, Union[int, str]]:
     Integer fields are stored as ints, everything else string.
     """
     if '=' not in field:
-        raise FieldParseError("No '=' found".format(field))
+        raise FieldParseError("No '=' found ({})".format(field))
     k, v = field.split('=', 1)
     # A few games have junk surrounding a field, like \n or \x00. Trim it.
     k = k.strip()

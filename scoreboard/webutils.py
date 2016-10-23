@@ -109,7 +109,8 @@ def _games_to_table(env: jinja2.environment.Environment,
     Returns: (string) '<table>contents</table>'.
     """
 
-    def format_trow(game: orm.Game, index: int, hidden_game: bool=False) -> str:
+    def format_trow(game: orm.Game, index: int,
+                    hidden_game: bool=False) -> str:
         """Convert a game to a table row."""
         classes = ''
         if game.won and not winning_games:
@@ -118,7 +119,8 @@ def _games_to_table(env: jinja2.environment.Environment,
             classes += "hidden-game "
 
         return trow.format(
-            rank='' if not show_ranks else """<td class="text-xs-right">%d</td>""" % (index + 1),
+            rank='' if not show_ranks else
+            """<td class="text-xs-right">%d</td>""" % (index + 1),
             tr_class=classes,
             prefix_col=''
             if not prefix_col else "<td>%s</td>" % prefix_col(game),
@@ -159,8 +161,8 @@ def _games_to_table(env: jinja2.environment.Environment,
                          "caseInsensitive": false
                      }},
                      "columnDefs": [
-                         {{ "searchable": false, "targets": [0,4,5,6,8] }},
-                         {{ "orderable": false, "targets": [6,8] }}
+                         {{ "searchable": false, "targets": [0,1,5,6,7,9] }},
+                         {{ "orderable": false, "targets": [7,9] }}
                      ],
                      "order": [[0, "desc"]],
                      "info": false,
@@ -212,7 +214,12 @@ def _games_to_table(env: jinja2.environment.Environment,
       <td>{morgue}</td>
     </tr>"""
 
-    tbody = "\n".join(format_trow(game=game, index=index, hidden_game=(index >= show_number if show_number > 0 else False)) for index, game in enumerate(games))
+    tbody = "\n".join(
+        format_trow(
+            game=game,
+            index=index,
+            hidden_game=(index >= show_number if show_number > 0 else False))
+        for index, game in enumerate(games))
 
     return t.format(
         id=uuid.uuid4(),
@@ -416,7 +423,13 @@ def generic_highscores_to_table(env: jinja2.environment.Environment,
                                 datatables: bool=False) -> str:
     """Convert list of winning games into a HTML table."""
     return _games_to_table(
-        env, data, show_player=show_player, show_number=show_number, show_ranks=show_ranks, winning_games=True, datatables=datatables)
+        env,
+        data,
+        show_player=show_player,
+        show_number=show_number,
+        show_ranks=show_ranks,
+        winning_games=True,
+        datatables=datatables)
 
 
 @jinja2.environmentfilter

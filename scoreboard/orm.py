@@ -1,6 +1,5 @@
 """Basic data model."""
 
-from typing import Optional
 import sqlite3  # for typing
 
 import characteristic
@@ -34,6 +33,7 @@ class Server(Base):
     id = Column(Integer, primary_key=True, nullable=False)  # type: int
     name = Column(
         String(4), nullable=False, index=True, unique=True)  # type: str
+
 
 # Many-to-many mapping of players to achivements
 AwardedAchievements = Table(
