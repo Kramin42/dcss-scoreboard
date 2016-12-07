@@ -52,12 +52,6 @@ module.exports = {
         test: /\.vue$/,
         loader: 'vue'
       },
-      // {
-      //   test: /\.js$/,
-      //   loader: 'babel',
-      //   include: projectRoot,
-      //   exclude: /node_modules/
-      // },
       {
         test: /\.js$/,
         loader: 'babel',
@@ -65,23 +59,15 @@ module.exports = {
         exclude: /node_modules/
       },
       {
-        test: /\.jsx$/,
+        test: /\.jsx?$/,
         loader: 'babel',
         include: path.join(__dirname, '../node_modules/vue-tables-2')
       },
       {
-        test: /\.jsx$/,
+        test: /\.jsx?$/,
         loader: 'babel',
         include: path.join(__dirname, '../node_modules/vue-pagination-2')
       },
-      // { 
-      //   test: /\.jsx$/, 
-      //   loader: 'babel', 
-      // }, 
-      // { 
-      //   test: /vue-tables-2.*?js$/, 
-      //   loader: 'babel' 
-      // },
       {
         test: /\.html$/,
         loader: 'vue-html'
