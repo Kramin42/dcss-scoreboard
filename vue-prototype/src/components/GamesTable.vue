@@ -6,17 +6,21 @@
 </template>
 
 <script>
+  import * as filters from '../filters/'
+
   export default {
-    components: {
-    },
     props: ['games'],
+    computed: {
+      columns: () => {
+        return ['score', 'char', 'god', 'runes', 'turns', 'dur', 'date', 'version']
+      }
+    },
     data: function () {
       return {
         options: {
           filterable: false,
           headings: {
             char: 'Combo',
-            tmsg: 'End',
             dur: 'Duration'
           },
           perPage: 20,
@@ -25,26 +29,25 @@
             column: 'end'
           },
           templates: {
+            score: function (h, row) {
+              return row.score.toLocaleString()
+            },
+            turns: function (h, row) {
+              return row.turns.toLocaleString()
+            },
             dur: function (h, row) {
-              let dur = row.dur
-              let hh = (~~(dur / 3600)).toString()
-              while (hh.length < 2) hh = '0' + hh
-              let mm = (~~(dur % 3600 / 60)).toString()
-              while (mm.length < 2) mm = '0' + mm
-              let ss = (dur % 60).toString()
-              while (ss.length < 2) ss = '0' + ss
-              return `${hh}:${mm}:${ss}`
+              return filters.prettydur(row.dur)
             },
             date: function (h, row) {
-              return new Date(Number(row.end) * 1000).toLocaleString()
+              return filters.date(row.end)
             }
+          },
+          texts: {
+            count: 'Showing {from} to {to} of {count} games',
+            limit: 'Games:',
+            noResults: 'No games match these filters'
           }
         }
-      }
-    },
-    computed: {
-      columns: () => {
-        return ['score', 'char', 'god', 'runes', 'turns', 'dur', 'date', 'version']
       }
     }
   }
