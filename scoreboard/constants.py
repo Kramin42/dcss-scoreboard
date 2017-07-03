@@ -10,6 +10,7 @@ Achievement = namedtuple('Achievement',
                          ['key', 'name', 'description', 'hidden', 'players'])
 
 SPECIES = {
+    Species('Ba', 'Barachian', True),
     Species('Ce', 'Centaur', True),
     Species('DD', 'Deep Dwarf', True),
     Species('DE', 'Deep Elf', True),
@@ -19,6 +20,7 @@ SPECIES = {
     Species('Fe', 'Felid', True),
     Species('Fo', 'Formicid', True),
     Species('Gh', 'Ghoul', True),
+    Species('Gn', 'Gnoll', True),
     Species('Gr', 'Gargoyle', True),
     Species('HE', 'High Elf', True),
     Species('HO', 'Hill Orc', True),
@@ -38,7 +40,7 @@ SPECIES = {
     Species('Vp', 'Vampire', True),
     # Non-playable species
     Species('El', 'Elf', False),
-    Species('Gn', 'Gnome', False),
+    Species('Gm', 'Gnome', False),
     Species('OM', 'Ogre-Mage', False),
     Species('HD', 'Hill Dwarf', False),
     Species('MD', 'Mountain Dwarf', False),
@@ -114,6 +116,7 @@ GODS = {
     God('Xom', True),
     God('Yredelemnul', True),
     God('Zin', True),
+    God('Wu Jian', True),
     # Non-playable gods
     God('Pakellas', False)
 }
@@ -138,10 +141,17 @@ GOD_NAME_FIXUPS = {
     # Nostalgia names
     'Lugafu': 'Trog',
     'Lucy': 'Lugonu',
-    'Feawn': 'Fedhas'
+    'Feawn': 'Fedhas',
+    'Ieoh Jian': 'Wu Jian',
 }
 BACKGROUND_SHORTNAME_FIXUPS = {'Am': 'AM'}
-SPECIES_SHORTNAME_FIXUPS = {'Ke': 'Te', 'DS': 'Ds', 'DG': 'Dg', 'OP': 'Op'}
+SPECIES_SHORTNAME_FIXUPS = {
+    'Ke': 'Te',
+    'DS': 'Ds',
+    'DG': 'Dg',
+    'OP': 'Op',
+    'Bu': 'Gn'
+}
 SPECIES_NAME_FIXUPS = {
     'Yellow Draconian': 'Draconian',
     'Grey Draconian': 'Draconian',
@@ -154,6 +164,7 @@ SPECIES_NAME_FIXUPS = {
     'Pale Draconian': 'Draconian',
     'Grotesk': 'Gargoyle',
     'Kenku': 'Tengu',
+    'Bultungin': 'Gnoll',
 }
 BRANCH_NAME_FIXUPS = {
     # April fool's one year
@@ -214,7 +225,8 @@ BLACKLISTS = {
         'notqw', 'jw', 'parabodrick', 'hyperqwbe', 'cashybrid', 'tstbtto',
         'parabolic', 'oppbolic', 'ew', 'rushxxi', 'gaubot', 'cojitobot',
         'paulcdejean', 'otabotab', 'nakatomy', 'testingqw', 'beemell', 'beem',
-        'drasked', 'phybot', 'khrogbot', 'jwbot'
+        'drasked', 'phybot', 'khrogbot', 'jwbot', 'autocrawlbot', 'swippen',
+        'cotteux',
     },
     'bot-games': {'LoveLain:cao:20160903064250S'}
 }
@@ -274,6 +286,29 @@ KTYP_FIXUPS = {
     'falling down stairs': 'falling_down_stairs'
 }
 ACHIEVEMENTS = (
+    Achievement('0.19_first', '0.19 Tournament: First Place',
+                'First place in the 0.19 tournament, May 2016.', True,
+                ('Yermak', )),
+    Achievement('0.19_second', '0.19 Tournament: Second Place',
+                'Second place in the 0.19 tournament, May 2016.', True,
+                ('Ultraviolent4', )),
+    Achievement('0.19_third', '0.19 Tournament: Third Place',
+                'Third place in the 0.19 tournament, May 2016.', True,
+                ('p0werm0de', )),
+    Achievement(
+        '0.19_clan_first', '0.19 Tournament: First Place (Clan)',
+        'Part of the first placed clan in the 0.19 tournament, May 2016.',
+        True,
+        ('Charly', 'SaintRoka', 'Sapher', 'Turgon', 'Yermak', 'pedritolo')),
+    Achievement(
+        '0.19_clan_second', '0.19 Tournament: Second Place (Clan)',
+        'Part of the second placed clan in the 0.19 tournament, May 2016.',
+        True, ('Leszczynek', 'Enish', 'kuniqs', 'murphy', 'p0werm0de', 'vev')),
+    Achievement(
+        '0.19_clan_third', '0.19 Tournament: Third Place (Clan)',
+        'Part of the third placed clan in the 0.19 tournament, May 2016.',
+        True, ('Ultraviolent4', 'PurpleRed', 'alcopop', 'edsrzf', 'tabstorm',
+               'AllRandomAllDemise')),
     Achievement('0.18_first', '0.18 Tournament: First Place',
                 'First place in the 0.18 tournament, May 2016.', True,
                 ('Yermak', )),
@@ -513,7 +548,7 @@ ACHIEVEMENTS = (
                 ('elliptic', )),
     Achievement('0.8_third', '0.8 Tournament: Third Place',
                 'Third place in the 0.8 tournament, May 2011.', True,
-                ('casmith789')),
+                ('casmith789', )),
     Achievement(
         '0.8_clan_first', '0.8 Tournament: First Place (Clan)',
         'Part of the first placed clan in the 0.8 tournament, May 2011.', True,
@@ -592,3 +627,4 @@ ACHIEVEMENTS = (
         '0.4_clan_third', '0.4 Tournament: Third Place (Clan)',
         'Part of the third placed clan in the 0.4 tournament, August 2008.',
         True, ('Eronarn', 'Foggy', 'Tag', 'Voiks', 'eternal', 'pointless')), )
+LOGFILE_API_GAME_ARGS = {'type': 'game', 'limit': '1000'}
