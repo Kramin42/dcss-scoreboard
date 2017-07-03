@@ -13,8 +13,6 @@ from sqlalchemy.orm import sessionmaker
 import sqlalchemy.pool
 import sqlalchemy.ext.declarative.api
 
-from . import model
-
 Base = declarative_base(
 )  # type: sqlalchemy.ext.declarative.api.DeclarativeMeta
 
@@ -504,6 +502,7 @@ def setup_database(*, database: str, path: str, credentials: str) -> None:
 
     sess = Session()
 
+    import scoreboard.model as model
     model.setup_species(sess)
     model.setup_backgrounds(sess)
     model.setup_gods(sess)
